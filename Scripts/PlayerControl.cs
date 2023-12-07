@@ -19,6 +19,14 @@ public class PlayerControl : MonoBehaviour
     //Powerup indicator
     public GameObject powerupIndicator;
 
+    //Game Manager
+    private GameManager gameManager;
+
+    void Start()
+    {
+        //Find Game Manager
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     void Update()
     {
@@ -79,6 +87,7 @@ public class PlayerControl : MonoBehaviour
             {
                 Destroy(gameObject);
                 Debug.Log("Collided with enemy");
+                gameManager.GameOver();
             }
 
         }

@@ -8,17 +8,30 @@ using JetBrains.Annotations;
 
 public class GameManager : MonoBehaviour
 {
-    //UI text
-    public TextMeshProUGUI gameOverText;
-
     //Game state
     public bool isGameActive;
     public Button restartButton;
+    public bool isLevelSuccessful;
+    public TextMeshProUGUI gameOverText;
 
-    // Start is called before the first frame update
+    //End level
+    public GameObject endLevelZone;
+    public GameObject successText;
+
+    //Protected Storage
+    public Storage storage;
+
+    //Level #
+    public TextMeshProUGUI levelText;
+    private int level;
+
+
     void Start()
     {
       isGameActive = true;
+      StartCoroutine(LevelEndCountdown());
+      storage = GameObject.Find("Storage").GetComponent<Storage>();  
+
     }
 
     public void GameOver()
@@ -31,5 +44,28 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LevelSuccess()
+    {
+       if (isLevelSuccessful == true) 
+        {
+            endLevelZone.gameObject.SetActive(true);
+            successText.gameObject.SetActive(true);
+            isGameActive = false;
+        }
+    }
+
+    IEnumerator LevelEndCountdown()
+    {
+        yield return new WaitForSeconds(30);
+        isLevelSuccessful = true;
+        LevelSuccess();
+    }
+
+    public void LevelNumber(int levelUp)
+    {
+        level += levelUp;
+        levelText.text = "Level: " + level;
     }
 }

@@ -30,7 +30,9 @@ public class SpawnManager : MonoBehaviour
 
         //Spawn intervals (Enemy)
         int eDelay = Random.Range(1, 2);
-         int eRate = Random.Range(3, 7);
+         float eRate = Random.Range(3, 7);
+
+        eRate = eRate * Mathf.Pow(.9f, (float)gameManager.storage.level);
 
          InvokeRepeating("SpawnEnemy", eDelay, eRate);
          InvokeRepeating("SpawnPowerup", pDelay, pRate);

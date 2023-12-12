@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-      isGameActive = true;
-      StartCoroutine(LevelEndCountdown());
-      storage = GameObject.Find("Storage").GetComponent<Storage>();  
+          level = 1;
+          LevelNumber(0);
+          isGameActive = true;
+          StartCoroutine(LevelEndCountdown());
+          storage = GameObject.Find("Storage").GetComponent<Storage>();  
 
     }
 
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LevelEndCountdown()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(3);
         isLevelSuccessful = true;
         LevelSuccess();
     }
@@ -68,4 +70,11 @@ public class GameManager : MonoBehaviour
         level += levelUp;
         levelText.text = "Level: " + level;
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LevelNumber(level);
+
+    } 
 }

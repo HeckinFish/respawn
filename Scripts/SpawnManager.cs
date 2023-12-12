@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         //Spawn intervals (Enemy)
-        int eDelay = Random.Range(1, 2);
+         float eDelay = Random.Range(1, 2);
          float eRate = Random.Range(3, 7);
 
         eRate = eRate * Mathf.Pow(.9f, (float)gameManager.storage.level);
@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy ()
     {
         //Spawn enemies if game is active
-        if (gameManager.isGameActive == true) { 
+        if (gameManager.isGameActive == true && gameManager.isLevelSuccessful == false) { 
             int enemyLeftIndex = Random.Range(0, enemiesLeft.Length);
             int enemyRightIndex = Random.Range(0, enemiesRight.Length);
 
@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnPowerup ()
     {
         //Spawn powerup if game is active
-        if (gameManager.isGameActive == true)
+        if (gameManager.isGameActive == true && gameManager.isLevelSuccessful == false)
         {
             Vector3 spawnPos = new Vector3(Random.Range(spawnRange, -spawnRange), 3, 15);
 

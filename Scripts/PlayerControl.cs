@@ -37,7 +37,10 @@ public class PlayerControl : MonoBehaviour
         //Movement
         horizontalInput = Input.GetAxis("Horizontal");
 
-        transform.Translate(Vector3.right *  horizontalInput * Time.deltaTime * speed);
+        if (gameManager.isLevelSuccessful == false)
+        {
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        }
 
         //Player bounds
         if (transform.position.x < -xBound)

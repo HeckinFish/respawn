@@ -32,8 +32,6 @@ public class SpawnManager : MonoBehaviour
          float eDelay = Random.Range(1, 2);
          float eRate = Random.Range(3, 7);
 
-        eRate = eRate * Mathf.Pow(.9f, (float)gameManager.storage.level);
-
          InvokeRepeating("SpawnEnemy", eDelay, eRate);
          InvokeRepeating("SpawnPowerup", pDelay, pRate);
     }
@@ -41,7 +39,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy ()
     {
         //Spawn enemies if game is active
-        if (gameManager.isGameActive == true && gameManager.isLevelSuccessful == false) { 
+        if (gameManager.isGameActive == true) { 
             int enemyLeftIndex = Random.Range(0, enemiesLeft.Length);
             int enemyRightIndex = Random.Range(0, enemiesRight.Length);
 
@@ -53,7 +51,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnPowerup ()
     {
         //Spawn powerup if game is active
-        if (gameManager.isGameActive == true && gameManager.isLevelSuccessful == false)
+        if (gameManager.isGameActive == true)
         {
             Vector3 spawnPos = new Vector3(Random.Range(spawnRange, -spawnRange), 3, 15);
 

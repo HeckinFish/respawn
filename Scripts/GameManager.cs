@@ -11,28 +11,18 @@ public class GameManager : MonoBehaviour
     //Game state
     public bool isGameActive;
     public Button restartButton;
-    public bool isLevelSuccessful;
     public TextMeshProUGUI gameOverText;
 
-    //End level
-    public GameObject endLevelZone;
-    public GameObject successText;
-
-    //Protected Storage
-    public Storage storage;
-
-    //Level #
-    public TextMeshProUGUI levelText;
-    private int level;
+    //Score
+    public TextMeshProUGUI scoreText;
+    private int score;
 
 
     void Start()
     {
-          level = 1;
-          LevelNumber(0);
+          score = 0;
+          ScoreCount(0);
           isGameActive = true;
-          StartCoroutine(LevelEndCountdown());
-          storage = GameObject.Find("Storage").GetComponent<Storage>();  
 
     }
 
@@ -48,33 +38,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void LevelSuccess()
+    public void ScoreCount(int scoreUp)
     {
-       if (isLevelSuccessful == true) 
-        {
-            endLevelZone.gameObject.SetActive(true);
-            successText.gameObject.SetActive(true);
-            isGameActive = false;
-        }
+        score += scoreUp;
+        scoreText.text = "Score: " + score;
     }
-
-    IEnumerator LevelEndCountdown()
-    {
-        yield return new WaitForSeconds(3);
-        isLevelSuccessful = true;
-        LevelSuccess();
-    }
-
-    public void LevelNumber(int levelUp)
-    {
-        level += levelUp;
-        levelText.text = "Level: " + level;
-    }
-
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        LevelNumber(level);
-
-    } 
 }

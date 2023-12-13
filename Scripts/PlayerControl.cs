@@ -37,10 +37,7 @@ public class PlayerControl : MonoBehaviour
         //Movement
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (gameManager.isLevelSuccessful == false)
-        {
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        }
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
         //Player bounds
         if (transform.position.x < -xBound)
@@ -55,6 +52,7 @@ public class PlayerControl : MonoBehaviour
 
     }
 
+    //Get the powerup
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Powerup"))
@@ -64,6 +62,7 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Powerup");
             StartCoroutine(PowerupCountdown());
             powerupIndicator.gameObject.SetActive(true);
+            gameManager.ScoreCount(1);
         }
     }
 

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManagerExample : MonoBehaviour
 {
     public GameObject endLevelScreen;
+    public TextMeshProUGUI endLevelText;
 
     public bool isLevelSuccessful;
 
@@ -20,6 +22,7 @@ public class GameManagerExample : MonoBehaviour
         if (isLevelSuccessful == true)
             {
                 endLevelScreen.SetActive(true);
+                endLevelText.gameObject.SetActive(true);
             }
     }
 }

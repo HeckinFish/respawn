@@ -16,7 +16,7 @@ public class RepeatBackground : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider>().size.x / 2;
+        repeatWidth = GetComponent<BoxCollider>().size.z / 2;
     }
 
     // Update is called once per frame

@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
 
         //Move
-        if (gameManager.isGameActive == true)
+        if (gameManager.isGameActive == true && !gameManager.isOnTitleScreen)
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }

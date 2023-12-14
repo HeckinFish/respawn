@@ -39,7 +39,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy ()
     {
         //Spawn enemies if game is active
-        if (gameManager.isGameActive == true) { 
+        if (gameManager.isGameActive == true && !gameManager.isOnTitleScreen) { 
             int enemyLeftIndex = Random.Range(0, enemiesLeft.Length);
             int enemyRightIndex = Random.Range(0, enemiesRight.Length);
 
@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnPowerup ()
     {
         //Spawn powerup if game is active
-        if (gameManager.isGameActive == true)
+        if (gameManager.isGameActive == true && !gameManager.isOnTitleScreen)
         {
             Vector3 spawnPos = new Vector3(Random.Range(spawnRange, -spawnRange), 3, 15);
 

@@ -10,27 +10,59 @@ public class GameManager : MonoBehaviour
 {
     //Game state
     public bool isGameActive;
-    public Button restartButton;
+    public bool isOnTitleScreen;
+    public Button startButton;
     public TextMeshProUGUI gameOverText;
 
     //Score
     public TextMeshProUGUI scoreText;
     private int score;
 
+    //Title Screen
+    public GameObject titleScreen;
+    public GameObject titleBackground;
+
 
     void Start()
     {
-          score = 0;
-          ScoreCount(0);
-          isGameActive = true;
+          isOnTitleScreen = true;
+          isGameActive = false;
+    }
+
+    public void GameStart()
+    {
+        isGameActive = true;
+        isOnTitleScreen = false;
+        titleScreen.gameObject.SetActive(false);
+        titleBackground.gameObject.SetActive(false);
 
     }
 
-    public void GameOver()
+    public void TitleScreen()
     {
-        gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
         isGameActive = false;
+        isOnTitleScreen = true;
+        titleScreen.gameObject.SetActive(true);
+        titleBackground.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(false);
+    }
+
+    public void GameOver()
+    { 
+        if (!isOnTitleScreen)
+        {
+            gameOverText.gameObject.SetActive(true);
+            isGameActive = false;
+            StartCoroutine(ResetToTitle());
+        }
+        
+    }
+
+    IEnumerator ResetToTitle()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void RestartGame()

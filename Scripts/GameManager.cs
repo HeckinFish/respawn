@@ -29,6 +29,21 @@ public class GameManager : MonoBehaviour
           isGameActive = false;
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Start"))
+        {
+            Debug.Log("Start button pressed");
+            GameStart();
+        }
+
+        if (Input.GetButtonDown("Exit"))
+        {
+            Debug.Log("Exit button pressed");
+            Application.Quit();
+        }
+    }
+
     public void GameStart()
     {
         isGameActive = true;

@@ -22,10 +22,19 @@ public class PlayerControl : MonoBehaviour
     //Game Manager
     private GameManager gameManager;
 
+
+    //Audio
+    public AudioClip impactSound;
+    public AudioClip powerupSound;
+    private AudioSource playerAudio;
+
     void Start()
     {
         //Find Game Manager
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        //Find Audio source
+        playerAudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -63,6 +72,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(PowerupCountdown());
             powerupIndicator.gameObject.SetActive(true);
             gameManager.ScoreCount(1);
+            playerAudio.PlayOneShot(powerupSound, 1.0f);
         }
     }
 
@@ -79,6 +89,8 @@ public class PlayerControl : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            playerAudio.PlayOneShot(impactSound, 1.0f);
+
             if (hasPowerup == true)
             {
                 Debug.Log("Collided with " + collision.gameObject.name + " with powerup set to " + hasPowerup);
